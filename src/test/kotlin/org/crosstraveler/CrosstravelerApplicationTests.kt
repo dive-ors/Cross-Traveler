@@ -1,13 +1,14 @@
 package org.crosstraveler
 
+import org.crosstraveler.config.TestContainerIntegrationTest
 import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
+
+@TestContainerIntegrationTest
 class CrosstravelerApplicationTests {
 
-	@Test
-	fun contextLoads() {
-	}
+    @Test
+    fun contextLoads() {
+    }
 
 }
