@@ -8,20 +8,23 @@ import org.springframework.stereotype.Service
 @Service
 class SkillTravelerService(private val skillTravelerRepository: SkillTravelerRepository) {
 
-    fun getPlayersBySkill(skillName: String): List<SkillTraveler> =
+    fun getUserByWantedSkillName(skillName: String): List<UserSkill> =
         skillTravelerRepository.findBySkillNameLike(skillName)
 
-    fun addTravelerNotice(skillTraveler: SkillTraveler): SkillTraveler {
+    fun addUserWantedSkills(userSkills: List<UserSkill>): List<UserSkill> {
+        return userSkills.map { addUserWantedSkill(it) }
+    }
 
+
+    fun addUserWantedSkill(userSkill: UserSkill): UserSkill {
         // 저장된 정보가 없는 경우, request 를 그대로 입력
-        val user: SkillTraveler = skillTravelerRepository.findByUserName(skillTraveler.userName)
-            ?: return skillTravelerRepository.save(skillTraveler)
+        val user: UserSkill = skillTravelerRepository.findByUserName(userSkill.userName)
+            ?: return skillTravelerRepository.save(userSkill)
 
-        val notExistSkills = getNotExistSkillName(user.skillName, skillTraveler.skillName)
+        val notExistSkills = getNotExistSkillName(user.skillName, userSkill.skillName)
 
 
         return skillTravelerRepository.save(user.addSkillName(notExistSkills))
-
     }
 
     private fun getNotExistSkillName(userSkills: List<String>, addedSkills: List<String>): List<String> =
@@ -34,4 +37,5 @@ class SkillTravelerService(private val skillTravelerRepository: SkillTravelerRep
         }
 
 
+    fun deleteAll() = skillTravelerRepository.deleteAll()
 }

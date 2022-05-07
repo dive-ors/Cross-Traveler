@@ -1,18 +1,13 @@
 package org.crosstraveler.infra.es
 
-import org.crosstraveler.application.SkillTraveler
+import org.crosstraveler.application.UserSkill
 import org.crosstraveler.application.SkillTravelerRepository
-import org.crosstraveler.config.ElasticsearchTestConfig
 import org.crosstraveler.config.TestContainerIntegrationTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.Import
-import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories
-import org.springframework.test.context.TestConstructor
 
 
 @TestContainerIntegrationTest
@@ -31,7 +26,7 @@ internal class TravelerRepositoryIntegrationTest {
     @Test
     fun getTraveler() {
 
-        val fixture = SkillTraveler("탕수륙", "숲속고양이", listOf("파이어익스퍼트1"))
+        val fixture = UserSkill("탕수륙", "숲속고양이", listOf("파이어익스퍼트1"))
         travelerRepository.save(fixture)
 
 

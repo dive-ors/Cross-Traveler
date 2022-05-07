@@ -1,9 +1,9 @@
 package org.crosstraveler.presentation
 
-import org.crosstraveler.application.SkillTraveler
+import org.crosstraveler.application.UserSkill
 
 
-fun SkillTraveler.toView(): SkillTravelerView {
+fun UserSkill.toView(): SkillTravelerView {
     return SkillTravelerView(
         userName = userName,
         kingdomName = kingdomName,

@@ -4,9 +4,9 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface SkillTravelerRepository : ElasticsearchRepository<SkillTraveler, String> {
-    fun findByUserName(userName: String): SkillTraveler?
+interface SkillTravelerRepository : ElasticsearchRepository<UserSkill, String> {
+    fun findByUserName(userName: String): UserSkill?
 
     // https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#elasticsearch.repositories#elasticsearch.query-methods.criterions
-    fun findBySkillNameLike(skillName: String): List<SkillTraveler>
+    fun findBySkillNameLike(skillName: String): List<UserSkill>
 }

@@ -13,8 +13,8 @@ import org.springframework.data.elasticsearch.annotations.WriteTypeHint
     writeTypeHint = WriteTypeHint.FALSE
 )
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
-data class SkillTraveler(@field:Id val userName: String, val kingdomName: String, val skillName: List<String>) {
-    fun addSkillName(skillNames: List<String>): SkillTraveler {
+data class UserSkill(@field:Id val userName: String, val kingdomName: String, val skillName: List<String>) {
+    fun addSkillName(skillNames: List<String>): UserSkill {
         val skillName: List<String> = this.skillName + skillNames
         return this.copy(skillName = skillName)
     }

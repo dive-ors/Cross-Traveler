@@ -2,7 +2,7 @@ package org.crosstraveler.presentation
 
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
-import org.crosstraveler.application.SkillTraveler
+import org.crosstraveler.application.UserSkill
 import org.crosstraveler.application.SkillTravelerRepository
 import org.crosstraveler.application.SkillTravelerService
 import org.crosstraveler.util.toJson
@@ -34,9 +34,9 @@ internal class SkillTravelerControllerIntegrationTest(val mockMvc: MockMvc) {
     fun getEmptyUserBySkill() {
         val expectSkillName = "템페스트"
 
-        every { skillTravelerService.getPlayersBySkill(expectSkillName) } returns listOf()
+        every { skillTravelerService.getUserByWantedSkillName(expectSkillName) } returns listOf()
 
-        mockMvc.perform(get("/traveler/skill").param("skillName", expectSkillName))
+        mockMvc.perform(get("/users/wanted-skill").param("skillName", expectSkillName))
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().is2xxSuccessful)
             .andExpect(content().json("""[]"""))
@@ -46,12 +46,12 @@ internal class SkillTravelerControllerIntegrationTest(val mockMvc: MockMvc) {
     @DisplayName("입력된 값이 있을 경우, 전체 응답을 가져온다.")
     fun getUserBySkillAll() {
         val expectSkillName = "템페스트"
-        val expectSkillTravelers = listOf(SkillTraveler("탕수륙", "숲속고양이", listOf("템페스트오브라이트2")))
-        val expectedView = expectSkillTravelers.map { it.toView() }.toJson()
+        val expectUserSkills = listOf(UserSkill("탕수륙", "숲속고양이", listOf("템페스트오브라이트2")))
+        val expectedView = expectUserSkills.map { it.toView() }.toJson()
 
-        every { skillTravelerService.getPlayersBySkill(expectSkillName) } returns expectSkillTravelers
+        every { skillTravelerService.getUserByWantedSkillName(expectSkillName) } returns expectUserSkills
 
-        mockMvc.perform(get("/traveler/skill").param("skillName", expectSkillName))
+        mockMvc.perform(get("/users/wanted-skill").param("skillName", expectSkillName))
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().is2xxSuccessful)
             .andExpect(content().json(expectedView))
@@ -59,19 +59,41 @@ internal class SkillTravelerControllerIntegrationTest(val mockMvc: MockMvc) {
 
 
     @Test
-    fun addPlayer() {
+    @DisplayName("사용자가 원하는 skill 을 추가한다.")
+    fun addUserWantedSkill() {
         val request = SkillTravelerRequest("탕수륙", "숲속고양이", listOf("템페스트오브라이트1"))
         val skillTraveler = request.toModel()
 
-        every { skillTravelerService.addTravelerNotice(skillTraveler) } returns skillTraveler
+        every { skillTravelerService.addUserWantedSkill(skillTraveler) } returns skillTraveler
         mockMvc.perform(
-            post("/traveler/skill")
+            post("/user/wanted-skill")
                 .content(request.toJson())
                 .contentType(MediaType.APPLICATION_JSON)
         )
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().is2xxSuccessful)
             .andExpect(content().json(skillTraveler.toView().toJson()))
+    }
+
+
+    @Test
+    @DisplayName("사용자가 원하는 skill들을 추가한다.")
+    fun addUserWantedSkills() {
+        val request = SkillTravelerRequest("탕수륙", "숲속고양이", listOf("템페스트오브라이트1"))
+        val request2 = SkillTravelerRequest("후뿌뿌뿌", "숲속고양이", listOf("다크익스퍼트1"))
+        val skillTravelerRequests = listOf(request, request2)
+        val skillTravelers = listOf(request.toModel(), request2.toModel())
+
+        every { skillTravelerService.addUserWantedSkills(skillTravelers) } returns skillTravelers
+        mockMvc.perform(
+            post("/user/wanted-skills")
+                .content(skillTravelerRequests.toJson())
+                .contentType(MediaType.APPLICATION_JSON)
+        )
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(status().is2xxSuccessful)
+                // test 에 로직이 들어간거 같아 별로임 wrapper 로 내부 로직전환?
+            .andExpect(content().json(skillTravelers.map { it.toView() }.toJson()))
     }
 
 }

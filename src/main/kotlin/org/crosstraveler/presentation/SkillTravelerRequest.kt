@@ -1,11 +1,11 @@
 package org.crosstraveler.presentation
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.crosstraveler.application.SkillTraveler
+import org.crosstraveler.application.UserSkill
 
 
-fun SkillTravelerRequest.toModel(): SkillTraveler {
-    return SkillTraveler(
+fun SkillTravelerRequest.toModel(): UserSkill {
+    return UserSkill(
         userName = userName,
         kingdomName = kingdomName,
         skillName = skillName
