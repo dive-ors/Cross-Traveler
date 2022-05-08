@@ -2,9 +2,9 @@ package org.crosstraveler.presentation
 
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
-import org.crosstraveler.application.UserSkill
 import org.crosstraveler.application.SkillTravelerRepository
 import org.crosstraveler.application.SkillTravelerService
+import org.crosstraveler.application.UserSkill
 import org.crosstraveler.util.toJson
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @WebMvcTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-internal class SkillTravelerControllerIntegrationTest(val mockMvc: MockMvc) {
+internal class SkillTravelerControllerTest(private val mockMvc: MockMvc) {
 
     @MockkBean
     lateinit var skillTravelerService: SkillTravelerService
@@ -92,7 +92,7 @@ internal class SkillTravelerControllerIntegrationTest(val mockMvc: MockMvc) {
         )
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().is2xxSuccessful)
-                // test 에 로직이 들어간거 같아 별로임 wrapper 로 내부 로직전환?
+            // test 에 로직이 들어간거 같아 별로임 wrapper 로 내부 로직전환?
             .andExpect(content().json(skillTravelers.map { it.toView() }.toJson()))
     }
 
