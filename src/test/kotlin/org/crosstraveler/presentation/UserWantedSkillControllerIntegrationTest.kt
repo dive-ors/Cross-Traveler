@@ -17,6 +17,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 class UserWantedSkillControllerIntegrationTest(private val mockMvc: MockMvc) {
 
+    /**
+     * 검색 용
+     * 서버를 아직 할당받지 않아서 .. 이런식으로라도 ..
+     */
     @Test
     @DisplayName("bulk로 원하는 스킬을 등록 후, 조회한다.")
     fun getEmptyUserBySkill() {
@@ -29,7 +33,7 @@ class UserWantedSkillControllerIntegrationTest(private val mockMvc: MockMvc) {
         ).andExpect(MockMvcResultMatchers.status().is2xxSuccessful)
 
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/wanted-skill").param("skillName", "그래핑쏜2"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/wanted-skill").param("skillName", "메테오2"))
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.status().is2xxSuccessful)
 
