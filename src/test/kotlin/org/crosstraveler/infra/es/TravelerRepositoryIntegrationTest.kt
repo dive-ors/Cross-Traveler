@@ -1,7 +1,7 @@
 package org.crosstraveler.infra.es
 
-import org.crosstraveler.application.UserSkill
-import org.crosstraveler.application.SkillTravelerRepository
+import org.crosstraveler.application.RequiredSkill
+import org.crosstraveler.application.RequiredSkillRepository
 import org.crosstraveler.config.TestContainerIntegrationTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -16,7 +16,7 @@ internal class TravelerRepositoryIntegrationTest {
 
 
     @Autowired
-    private lateinit var travelerRepository: SkillTravelerRepository
+    private lateinit var travelerRepository: RequiredSkillRepository
     @BeforeEach
     fun setUp() {
         travelerRepository.deleteAll()
@@ -26,7 +26,7 @@ internal class TravelerRepositoryIntegrationTest {
     @Test
     fun getTraveler() {
 
-        val fixture = UserSkill("탕수륙", "숲속고양이", listOf("파이어익스퍼트1"))
+        val fixture = RequiredSkill("탕수륙", "숲속고양이", listOf("파이어익스퍼트1"))
         travelerRepository.save(fixture)
 
 

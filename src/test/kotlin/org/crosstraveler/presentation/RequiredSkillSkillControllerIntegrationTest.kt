@@ -1,6 +1,7 @@
 package org.crosstraveler.presentation
 
 import org.crosstraveler.config.TestContainerIntegrationTest
+import org.crosstraveler.presentation.traveler.RequiredSkillController
 import org.crosstraveler.util.readJson
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -15,7 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 @AutoConfigureMockMvc
 @TestContainerIntegrationTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-class UserWantedSkillControllerIntegrationTest(private val mockMvc: MockMvc) {
+class RequiredSkillSkillControllerIntegrationTest(private val mockMvc: MockMvc) {
 
     /**
      * 검색 용
@@ -27,13 +28,13 @@ class UserWantedSkillControllerIntegrationTest(private val mockMvc: MockMvc) {
         val body = "/json/wanted-skill/Bulk-Wanted-Skills.json".readJson()
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/user/wanted-skills")
+            MockMvcRequestBuilders.post(RequiredSkillController.POST_USERS_WANTED_SKILL)
                 .content(body)
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().is2xxSuccessful)
 
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/wanted-skill").param("skillName", "메테오2"))
+        mockMvc.perform(MockMvcRequestBuilders.get(RequiredSkillController.GET_USERS_WANTED_SKILL).param("skillName", "메테오2"))
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.status().is2xxSuccessful)
 

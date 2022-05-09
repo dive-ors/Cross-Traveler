@@ -7,7 +7,7 @@ internal class SkillTravelerTest {
 
     @Test
     fun addSkillNames() {
-        val userSkill = UserSkill("탕수륙", "숲속고양이", listOf("파이어크래커1"))
+        val userSkill = RequiredSkill("탕수륙", "숲속고양이", listOf("파이어크래커1"))
 
         val expect = userSkill.addSkillName(listOf("파이어익스퍼트1"))
 
