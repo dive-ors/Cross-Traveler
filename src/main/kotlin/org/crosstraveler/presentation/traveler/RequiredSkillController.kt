@@ -15,11 +15,12 @@ class RequiredSkillController(private val requiredSkillService: RequiredSkillSer
         const val POST_USERS_WANTED_SKILL = "/users/required-skill"
     }
 
+    // list 로 받도록 수정
     @GetMapping(GET_USERS_WANTED_SKILL)
-    fun getUserByRequiredSkill(@RequestParam("skillName") skillName: String): List<RequiredSkillView> {
-        require(skillName.isNotBlank()) { "userName is blank." }
+    fun getUserByRequiredSkills(@RequestParam("skillNames") skillNames: List<String>): List<RequiredSkillView> {
+        require(skillNames.isNotEmpty()) { "skillNames is blank." }
 
-        return requiredSkillService.getUserByRequiredSkill(skillName).map { it.toView() }
+        return requiredSkillService.getUserByRequiredSkills(skillNames).map { it.toView() }
     }
 
     @PostMapping(POST_USER_WANTED_SKILL)

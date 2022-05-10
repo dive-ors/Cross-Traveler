@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.util.LinkedMultiValueMap
 
 @AutoConfigureMockMvc
 @TestContainerIntegrationTest
@@ -33,8 +34,11 @@ class RequiredSkillSkillControllerIntegrationTest(private val mockMvc: MockMvc) 
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().is2xxSuccessful)
 
+        val travelerSkills = listOf("라이트익스퍼트1", "스타폴2")
+        val params = LinkedMultiValueMap<String, String>()
+        params.addAll("skillNames", travelerSkills)
 
-        mockMvc.perform(MockMvcRequestBuilders.get(RequiredSkillController.GET_USERS_WANTED_SKILL).param("skillName", "메테오2"))
+        mockMvc.perform(MockMvcRequestBuilders.get(RequiredSkillController.GET_USERS_WANTED_SKILL).params(params))
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.status().is2xxSuccessful)
 

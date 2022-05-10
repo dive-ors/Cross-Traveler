@@ -17,6 +17,7 @@ internal class TravelerRepositoryIntegrationTest {
 
     @Autowired
     private lateinit var travelerRepository: RequiredSkillRepository
+
     @BeforeEach
     fun setUp() {
         travelerRepository.deleteAll()
@@ -26,11 +27,11 @@ internal class TravelerRepositoryIntegrationTest {
     @Test
     fun getTraveler() {
 
-        val fixture = RequiredSkill("탕수륙", "숲속고양이", listOf("파이어익스퍼트1"))
+        val fixture = RequiredSkill("탕수륙", "숲속고양이", listOf("우드익스퍼트1","우드익스퍼트2","푸드파이터3"))
         travelerRepository.save(fixture)
 
 
-        val response = travelerRepository.findBySkillNameLike("파이어익스퍼트1")
+        val response = travelerRepository.findBySkillNameIn(listOf("파이어익스퍼트2","푸드파이터3"))
 
         log.info("${response[0].userName} : ${response[0].skillName}")
 

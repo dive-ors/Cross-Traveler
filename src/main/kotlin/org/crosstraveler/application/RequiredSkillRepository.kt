@@ -8,5 +8,5 @@ interface RequiredSkillRepository : ElasticsearchRepository<RequiredSkill, Strin
     fun findByUserName(userName: String): RequiredSkill?
 
     // https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#elasticsearch.repositories#elasticsearch.query-methods.criterions
-    fun findBySkillNameLike(skillName: String): List<RequiredSkill>
+    fun findBySkillNameIn(skillName: List<String>): List<RequiredSkill>
 }

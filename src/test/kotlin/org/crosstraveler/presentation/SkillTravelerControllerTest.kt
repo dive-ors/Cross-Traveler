@@ -36,11 +36,11 @@ internal class SkillTravelerControllerTest(private val mockMvc: MockMvc) {
     @Test
     @DisplayName("입력된 값이 없을 경우, 빈 응답을 내려준다.")
     fun getEmptyUserBySkill() {
-        val expectSkillName = "템페스트"
+        val expectSkillNames = listOf("템페스트")
 
-        every { requiredSkillService.getUserByRequiredSkill(expectSkillName) } returns listOf()
+        every { requiredSkillService.getUserByRequiredSkills(expectSkillNames) } returns listOf()
 
-        mockMvc.perform(get(RequiredSkillController.GET_USERS_WANTED_SKILL).param("skillName", expectSkillName))
+        mockMvc.perform(get(RequiredSkillController.GET_USERS_WANTED_SKILL).param("skillNames", expectSkillNames.joinToString(",")))
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().is2xxSuccessful)
             .andExpect(content().json("""[]"""))
@@ -49,13 +49,13 @@ internal class SkillTravelerControllerTest(private val mockMvc: MockMvc) {
     @Test
     @DisplayName("입력된 값이 있을 경우, 전체 응답을 가져온다.")
     fun getUserBySkillAll() {
-        val expectSkillName = "템페스트"
+        val expectSkillNames = listOf("템페스트")
         val expectUserSkills = listOf(RequiredSkill("탕수륙", "숲속고양이", listOf("템페스트오브라이트2")))
         val expectedView = expectUserSkills.map { it.toView() }.toJson()
 
-        every { requiredSkillService.getUserByRequiredSkill(expectSkillName) } returns expectUserSkills
+        every { requiredSkillService.getUserByRequiredSkills(expectSkillNames) } returns expectUserSkills
 
-        mockMvc.perform(get(RequiredSkillController.GET_USERS_WANTED_SKILL).param("skillName", expectSkillName))
+        mockMvc.perform(get(RequiredSkillController.GET_USERS_WANTED_SKILL).param("skillName", expectSkillNames.joinToString(",")))
             .andDo(MockMvcResultHandlers.print())
             .andExpect(status().is2xxSuccessful)
             .andExpect(content().json(expectedView))

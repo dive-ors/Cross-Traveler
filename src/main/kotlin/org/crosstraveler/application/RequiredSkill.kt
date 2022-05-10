@@ -14,9 +14,15 @@ import org.springframework.data.elasticsearch.annotations.WriteTypeHint
 )
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
 data class RequiredSkill(@field:Id val userName: String, val kingdomName: String, val skillName: List<String>) {
+
     fun addSkillName(skillNames: List<String>): RequiredSkill {
         val skillName: List<String> = this.skillName + skillNames
         return this.copy(skillName = skillName)
+    }
+
+    fun getTravelerRequiredSkill(requestSkillNames: List<String>): RequiredSkill {
+        val requiredSkillNames = requestSkillNames.filter { skillName.contains(it) }
+        return RequiredSkill(userName = userName, kingdomName = kingdomName, skillName = requiredSkillNames)
     }
 
 }

@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service
 @Service
 class RequiredSkillService(private val requiredSkillRepository: RequiredSkillRepository) {
 
-    fun getUserByRequiredSkill(skillName: String): List<RequiredSkill> {
-        return requiredSkillRepository.findBySkillNameLike(skillName)
+    fun getUserByRequiredSkills(skillNames: List<String>): List<RequiredSkill> {
+        val requiredSkills = requiredSkillRepository.findBySkillNameIn(skillNames)
+
+        // 방랑상인에 등장한 스킬들만 내려준다.
+        return requiredSkills.map { it.getTravelerRequiredSkill(skillNames) }
     }
 
     fun addUserWantedSkills(userSkills: List<RequiredSkill>): List<RequiredSkill> {
