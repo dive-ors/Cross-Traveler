@@ -1,7 +1,7 @@
 package org.crosstraveler.infra.es
 
-import org.crosstraveler.application.RequiredSkill
-import org.crosstraveler.application.RequiredSkillRepository
+import org.crosstraveler.application.traveler.RequiredSkill
+import org.crosstraveler.application.traveler.RequiredSkillRepository
 import org.crosstraveler.config.TestContainerIntegrationTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach

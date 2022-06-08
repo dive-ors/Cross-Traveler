@@ -2,9 +2,9 @@ package org.crosstraveler.presentation
 
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
-import org.crosstraveler.application.RequiredSkill
-import org.crosstraveler.application.RequiredSkillRepository
-import org.crosstraveler.application.RequiredSkillService
+import org.crosstraveler.application.traveler.RequiredSkill
+import org.crosstraveler.application.traveler.RequiredSkillRepository
+import org.crosstraveler.application.traveler.RequiredSkillService
 import org.crosstraveler.presentation.traveler.RequiredSkillController
 import org.crosstraveler.presentation.traveler.RequiredSkillRequest
 import org.crosstraveler.presentation.traveler.toModel

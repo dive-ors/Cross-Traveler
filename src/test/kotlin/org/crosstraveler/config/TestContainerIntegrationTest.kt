@@ -13,6 +13,6 @@ import org.springframework.test.context.ActiveProfiles
  */
 @SpringBootTest
 @ActiveProfiles("test")
-@Import(ElasticsearchTestConfig::class)
+@Import(ElasticsearchContainerTestConfig::class)
 annotation class TestContainerIntegrationTest
 

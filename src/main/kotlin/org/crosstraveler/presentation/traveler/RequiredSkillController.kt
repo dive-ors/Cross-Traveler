@@ -1,6 +1,6 @@
 package org.crosstraveler.presentation.traveler
 
-import org.crosstraveler.application.RequiredSkillService
+import org.crosstraveler.application.traveler.RequiredSkillService
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 

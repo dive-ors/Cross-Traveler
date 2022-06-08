@@ -1,4 +1,4 @@
-package org.crosstraveler.application
+package org.crosstraveler.application.traveler
 
 import org.springframework.stereotype.Service
 

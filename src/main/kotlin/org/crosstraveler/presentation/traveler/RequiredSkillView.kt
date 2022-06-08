@@ -1,6 +1,6 @@
 package org.crosstraveler.presentation.traveler
 
-import org.crosstraveler.application.RequiredSkill
+import org.crosstraveler.application.traveler.RequiredSkill
 
 
 fun RequiredSkill.toView(): RequiredSkillView {

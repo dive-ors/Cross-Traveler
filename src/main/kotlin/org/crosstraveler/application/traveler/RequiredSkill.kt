@@ -1,4 +1,4 @@
-package org.crosstraveler.application
+package org.crosstraveler.application.traveler
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming

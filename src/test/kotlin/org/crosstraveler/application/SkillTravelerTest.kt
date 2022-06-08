@@ -1,5 +1,6 @@
 package org.crosstraveler.application
 
+import org.crosstraveler.application.traveler.RequiredSkill
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
